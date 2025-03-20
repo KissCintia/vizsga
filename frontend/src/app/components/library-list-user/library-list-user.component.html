@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row d-flex justify-content-center">
+        <div class="container d-flex align-items-center gap-3"> 
+            <span id="felhasznalo">
+                Név: {{ userName }}
+            </span>
+            <table class="table table-bordered text-center">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">Szerző</th>
+                        <th scope="col">Cím</th>
+                        <th scope="col">Könyv raktári száma</th>
+                        <th scope="col">Ár (FT)</th>
+                        <th scope="col">Állapot</th>
+                        <th scope="col">Visszaadás</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let loan of loanArray">
+                        <td>{{ getBookByInventoryNumber(loan.inventory_number)?.author }}</td>
+                        <td>{{ getBookByInventoryNumber(loan.inventory_number)?.title }}</td>
+                        <td>{{ loan.inventory_number }}</td>
+                        <td>{{ getBookByInventoryNumber(loan.inventory_number)?.price }}</td>
+                        <td>{{ loan.status }}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" (click)="returnBook(loan.id)">Visszaadás</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
